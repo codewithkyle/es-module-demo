@@ -60,10 +60,17 @@ class App {
                     const newModule = new this._modules[id].default.prototype.constructor(module, newUUID);
                     module.setAttribute('data-uuid', newUUID);
                     this._currentModules.push(newModule);
-                    console.log(this._currentModules);
                 }
                 else {
-                    undefinedModules.push(id);
+                    let alreadyRequested = false;
+                    undefinedModules.map((alreadyRequestedId) => {
+                        if (id === alreadyRequestedId) {
+                            alreadyRequested = true;
+                        }
+                    });
+                    if (!alreadyRequested) {
+                        undefinedModules.push(id);
+                    }
                 }
             });
         });
@@ -73,16 +80,19 @@ class App {
     }
     importModules(requestedModules) {
         requestedModules.forEach((moduleId) => {
-            (() => __awaiter(this, void 0, void 0, function* () {
-                const uri = `${window.location.origin}${window.location.pathname}assets/${moduleId.toLowerCase()}.js`;
-                try {
-                    const module = yield import(uri);
-                    this._modules[moduleId] = module;
-                }
-                catch (e) {
-                    console.log('Error', e);
-                }
-            }))();
+            if (this._modules[moduleId] === undefined) {
+                console.log(`Getting module ${moduleId}`);
+                (() => __awaiter(this, void 0, void 0, function* () {
+                    const uri = `${window.location.origin}${window.location.pathname}assets/${moduleId.toLowerCase()}.js`;
+                    try {
+                        const module = yield import(uri);
+                        this._modules[moduleId] = module;
+                    }
+                    catch (e) {
+                        console.log('Error', e);
+                    }
+                }))();
+            }
         });
     }
     /**

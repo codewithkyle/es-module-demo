@@ -72,9 +72,16 @@ class App{
                     const newModule = new this._modules[id].default.prototype.constructor(module, newUUID);
                     module.setAttribute('data-uuid', newUUID);
                     this._currentModules.push(newModule);
-                    console.log(this._currentModules);
                 }else{
-                    undefinedModules.push(id);
+                    let alreadyRequested = false;
+                    undefinedModules.map((alreadyRequestedId:string)=>{
+                        if(id === alreadyRequestedId){
+                            alreadyRequested = true;
+                        }
+                    });
+                    if(!alreadyRequested){
+                        undefinedModules.push(id);
+                    }
                 }
             });
         });
@@ -87,15 +94,18 @@ class App{
 
     private importModules(requestedModules:Array<string>):void{
         requestedModules.forEach((moduleId:string)=>{
-            (async ()=>{
-                const uri = `${ window.location.origin }${ window.location.pathname }assets/${ moduleId.toLowerCase() }.js`;
-                try{
-                    const module = await import(uri);
-                    this._modules[moduleId] = module;
-                }catch(e){
-                    console.log('Error', e);
-                }
-            })();
+            if(this._modules[moduleId] === undefined){
+                console.log(`Getting module ${ moduleId }`);
+                (async ()=>{
+                    const uri = `${ window.location.origin }${ window.location.pathname }assets/${ moduleId.toLowerCase() }.js`;
+                    try{
+                        const module = await import(uri);
+                        this._modules[moduleId] = module;
+                    }catch(e){
+                        console.log('Error', e);
+                    }
+                })();
+            }
         });
     }
 
