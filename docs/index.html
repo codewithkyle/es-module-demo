@@ -54,24 +54,27 @@
             transform: translateY(2px);
             background-color: rgb(247, 247, 247);
         }
-        .o-block{
-            display: block;
-            width: 100%;
-            text-align: center;
-        }
         .c-component1{
             width: 256px;
             height: 158px;
             border-radius: 4px;
             background-color: rgb(255,255,255);
             border: 2px solid rgba(225,225,225);
-            box-shadow: 0 2px 4px rgba(41,41,41,0.1);
+            box-shadow: 0 4px 16px rgba(41,41,41,0.1);
             display: inline-flex;
             justify-content: center;
             align-items: center;
             text-transform: uppercase;
             cursor: pointer;
             user-select: none;
+            transition: all 25ms ease;
+            color: rgba(41,41,41,0.87);
+            margin: 16px;
+        }
+        .js-container{
+            display: flex;
+            justify-content: center;
+            flex-flow: row wrap;
         }
     </style>
     <script>
@@ -90,10 +93,11 @@
             <button class="js-button" data-component-id="Component2">Add Component 2</button>
         </section>
         <section class="js-container">
-            <div class="o-block">
-                <div class="c-component1" data-module="Component1">
-                    <span>Component 1</span>
-                </div>
+            <div class="c-component1" data-module="Component1">
+                <span>Component 1</span>
+            </div>
+            <div class="c-component1" data-module="Component1">
+                <span>Component 1</span>
             </div>
         </section>
     </article>

@@ -12,6 +12,23 @@ export default class Component1{
         this._name  = null;
 
         console.log('Component 1 started', this.el);
+
+        this.init();
+    }
+
+    private changeColor:EventListener = (e:Event)=>{
+        const randomColor = `${ this.getRandomInt(0, 255) }, ${ this.getRandomInt(0, 255) }, ${ this.getRandomInt(0, 255) }`;
+        this.el.style.borderColor = `rgb(${ randomColor })`;
+        this.el.style.boxShadow = `0 4px 16px rgba( ${ randomColor }, 0.15 )`;
+        this.el.style.color = `rgba(${ randomColor }, 0.87)`;
+    }
+
+    private getRandomInt(min:number, max:number):number{
+        return Math.random() * (max - min) + min;
+    }
+
+    private init():void{
+        this.el.addEventListener('mousemove', this.changeColor);
     }
 
     /**
