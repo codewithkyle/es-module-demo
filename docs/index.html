@@ -1,0 +1,71 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Demo | ES Modules Demo</title> 
+    <style>
+        body{
+            background-color: #F8F9FC;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            font-family: sans-serif;
+        }
+        article{
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            flex-flow: column wrap;
+        }
+        section{
+            width: 100%;
+            max-width: 840px;
+            padding: 32px;
+        }
+        button{
+            outline: none;
+            border: none;
+            border-radius: 2px;
+            height: 36px;
+            line-height: 36px;
+            padding: 0 16px;
+            font-size: 14px;
+            text-transform: uppercase;
+            font-weight: 500;
+            background-color: rgb(255,255,255);
+            box-shadow: 0 2px 4px rgba(41,41,41,0.1);
+            display: block;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: all 150ms ease;
+            margin-bottom: 16px;
+        }
+        button:last-of-type{
+            margin-bottom: 0;
+        }
+        button:hover{
+            background-color: rgb(252, 252, 252);
+        }
+        button:active{
+            transform: translateY(2px);
+            background-color: rgb(247, 247, 247);
+        }
+    </style>
+    <script>
+        let exports = {};
+    </script>
+    <script defer="defer" src="./assets/component.js"></script>
+    <script defer="defer" src="./assets/app.js"></script>
+</head>
+<body>
+    <article>
+        <section>
+            <button class="js-button" data-component-id="Component1">Add Component 1</button>
+            <button class="js-button" data-component-id="Component2">Add Component 2</button>
+        </section>
+    </article>
+</body>
+</html>
