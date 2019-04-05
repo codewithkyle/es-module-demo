@@ -1,9 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-class Component1 {
-    constructor() {
-        console.log('Component 1 started');
+export default class Component1 {
+    constructor(el) {
+        this.el = el;
         this._name = null;
+        console.log('Component 1 started', this.el);
     }
     /**
      * Sets the components name.
@@ -20,5 +19,4 @@ class Component1 {
         return this._name;
     }
 }
-exports.default = Component1;
 //# sourceMappingURL=component1.js.map

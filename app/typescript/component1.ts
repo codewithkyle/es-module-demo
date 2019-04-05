@@ -1,10 +1,15 @@
 export default class Component1{
 
+    public el:  HTMLElement;
+
     private _name:  string;
 
-    constructor(){
-        console.log('Component 1 started');
+    constructor(el:HTMLElement){
+        this.el = el;
+
         this._name  = null;
+
+        console.log('Component 1 started', this.el);
     }
 
     /**

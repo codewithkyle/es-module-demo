@@ -8,7 +8,7 @@
         "emitDecoratorMetadata": true,
         "removeComments": false,
         "target": "es6",
-        "module": "commonjs",
+        "module": "esNext",
         "moduleResolution": "node",
         "lib": [
             "dom",
