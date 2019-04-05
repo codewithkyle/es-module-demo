@@ -39,6 +39,7 @@ class App {
         return modules;
     }
     initModules() {
+        console.log('Getting modules');
         const modulesRequired = Array.from(document.body.querySelectorAll('[data-module]'));
         if (!modulesRequired.length) {
             console.log('No modules were required');
@@ -52,9 +53,10 @@ class App {
                 return;
             }
             moduleNames.forEach((id) => {
-                if (this._modules[id] !== undefined) {
+                if (this._modules[id] !== undefined && module.dataset.uuid === undefined) {
                     console.log(`Module ${id} is defined`);
                     new this._modules[id].default.prototype.constructor(module);
+                    module.setAttribute('data-uuid', this.uuid());
                 }
                 else {
                     undefinedModules.push(id);
@@ -78,6 +80,14 @@ class App {
                 }
             }))();
         });
+    }
+    /**
+     * Generates a UUID
+     * @see https://stackoverflow.com/a/2117523/11154271
+     */
+    uuid() {
+        //@ts-ignore
+        return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c => (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16));
     }
     /**
      * Called when the class has be initiated.

@@ -77,7 +77,10 @@
     <script>
         let exports = {};
     </script>
-    <script defer="defer" src="./assets/app.js"></script>
+    <script type="module" defer="defer" src="./assets/app.js"></script>
+    <script nomodule>
+        console.log('no module support');
+    </script>
 </head>
 <body>
     <article>
