@@ -1,6 +1,7 @@
 export default class Component1 {
-    constructor(el) {
+    constructor(el, uuid) {
         this.el = el;
+        this.uuid = uuid;
         this._name = null;
         console.log('Component 1 started', this.el);
     }

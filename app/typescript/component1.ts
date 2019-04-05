@@ -1,11 +1,13 @@
 export default class Component1{
 
-    public el:  HTMLElement;
+    public el:      HTMLElement;
+    public uuid:    string;
 
     private _name:  string;
 
-    constructor(el:HTMLElement){
+    constructor(el:HTMLElement, uuid:string){
         this.el = el;
+        this.uuid = uuid;
 
         this._name  = null;
 

@@ -4,6 +4,7 @@ class App{
     private _reinitBttn:    HTMLButtonElement;    
 
     private _modules:   Module;
+    private _currentModules:    Array<any>;
 
     constructor(){
 
@@ -11,7 +12,8 @@ class App{
         this._buttons       = Array.from(document.body.querySelectorAll('.js-button'));
         this._reinitBttn    = document.body.querySelector('.js-reinit');
         
-        this._modules   = {};
+        this._modules           = {};
+        this._currentModules    = [];
 
         // Call `init()` to start any event listeners
         this.init();
@@ -66,8 +68,11 @@ class App{
             moduleNames.forEach((id:string)=>{
                 if(this._modules[id] !== undefined && module.dataset.uuid === undefined){
                     console.log(`Module ${ id } is defined`);
-                    new this._modules[id].default.prototype.constructor(module);
-                    module.setAttribute('data-uuid', this.uuid());
+                    const newUUID = this.uuid();
+                    const newModule = new this._modules[id].default.prototype.constructor(module, newUUID);
+                    module.setAttribute('data-uuid', newUUID);
+                    this._currentModules.push(newModule);
+                    console.log(this._currentModules);
                 }else{
                     undefinedModules.push(id);
                 }
